@@ -1,0 +1,42 @@
+package {{package}}.controllers;
+
+import {{package}}.models.{{entity.name}};
+import {{package}}.services.{{entity.name}}Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/{{entity.nameLower}}s")
+public class {{entity.name}}Controller {
+
+    @Autowired
+    private {{entity.name}}Service {{entity.nameLower}}Service;
+
+    @GetMapping
+    public List<{{entity.name}}> getAll() {
+        return {{entity.nameLower}}Service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<{{entity.name}}> getById(@PathVariable Long id) {
+        return {{entity.nameLower}}Service.getById(id);
+    }
+
+    @PostMapping
+    public {{entity.name}} create(@RequestBody {{entity.name}} {{entity.nameLower}}) {
+        return {{entity.nameLower}}Service.create({{entity.nameLower}});
+    }
+
+    @PutMapping("/{id}")
+    public {{entity.name}} update(@PathVariable Long id, @RequestBody {{entity.name}} updated) {
+        return {{entity.nameLower}}Service.update(id, updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        {{entity.nameLower}}Service.delete(id);
+    }
+}

@@ -1,0 +1,25 @@
+package {{package}}.models;
+
+import jakarta.persistence.*;
+import java.io.Serializable;
+
+@Entity
+public class {{entity.name}} implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    {{#each entity.fields}}
+    private {{this.type}} {{this.name}};
+    {{/each}}
+
+    // Getters and setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    {{#each entity.fields}}
+    public {{this.type}} get{{capitalize this.name}}() { return {{this.name}}; }
+    public void set{{capitalize this.name}}({{this.type}} {{this.name}}) { this.name = {{this.name}}; }
+    {{/each}}
+}
